@@ -1,3 +1,7 @@
 package mbraun.student_application.model
 
-data class Gender()
+enum class Gender {
+    MALE,
+    FEMALE,
+    OTHER
+}
