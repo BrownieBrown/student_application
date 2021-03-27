@@ -11,6 +11,7 @@ plugins {
 group = "mbraun"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
+val buildNumber by extra("0")
 
 repositories {
     mavenCentral()
@@ -43,7 +44,7 @@ jib {
             username = System.getenv("DOCKERHUB_USERNAME")
             password = System.getenv("DOCKERHUB_PASSWORD")
         }
-
+    }
     container {
         ports = listOf("8080")
     }
