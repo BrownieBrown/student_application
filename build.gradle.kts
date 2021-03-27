@@ -36,6 +36,14 @@ tasks.withType<Test> {
 }
 
 jib {
+    to {
+        image = "mbraun/fullstack"
+        tags = setOf("$version", "$version.${extra["buildNumber"]}")
+        auth {
+            username = System.getenv("DOCKERHUB_USERNAME")
+            password = System.getenv("DOCKERHUB_PASSWORD")
+        }
+
     container {
         ports = listOf("8080")
     }
