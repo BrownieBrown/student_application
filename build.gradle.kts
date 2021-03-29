@@ -19,7 +19,9 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.postgresql:postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -38,7 +40,7 @@ tasks.withType<Test> {
 
 jib {
     to {
-        image = "mbraun/fullstack"
+        image = "docker.io/marcoalexanderbraun/student_application"
         tags = setOf("$version", "$version.${extra["buildNumber"]}")
         auth {
             username = System.getenv("DOCKERHUB_USERNAME")
@@ -49,4 +51,5 @@ jib {
         ports = listOf("8080")
     }
 }
+
 
