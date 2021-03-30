@@ -12,6 +12,7 @@ data class Student (
     val id: Long = -1,
     var name: String = "",
     var email: String = "",
+    @Enumerated(EnumType.STRING)
     var gender: Gender = Gender.OTHER) {
 
     constructor(name: String, email: String, gender: Gender) : this() {
