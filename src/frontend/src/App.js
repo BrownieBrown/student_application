@@ -67,7 +67,11 @@ function App() {
     }
     return (
         <>
-          <StudentDrawerForm showDrawer={isShowDrawer} setShowDrawer={setIsShowDrawer}/>
+          <StudentDrawerForm
+              showDrawer={isShowDrawer}
+              setShowDrawer={setIsShowDrawer}
+              fetchStudents={fetchStudents}
+          />
       <Table
         dataSource={students}
         columns={columns}

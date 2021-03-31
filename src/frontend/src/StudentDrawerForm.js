@@ -1,19 +1,27 @@
-// StudentDrawerForm.js
-
-import {Drawer, Input, Col, Select, Form, Row, Button} from 'antd';
+import {Drawer, Input, Col, Select, Form, Row, Button, Spin} from 'antd';
 import {addNewStudent} from "./client";
+import {LoadingOutlined} from "@ant-design/icons";
+import {useState} from "react";
 
 const {Option} = Select;
 
-function StudentDrawerForm({showDrawer, setShowDrawer}) {
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+function StudentDrawerForm({showDrawer, setShowDrawer, fetchStudents}) {
     const onCLose = () => setShowDrawer(false);
+    const [submitting, setSubmitting] = useState(false)
 
     const onFinish = values => {
+        setSubmitting(true)
         console.log(JSON.stringify(values, null, 2))
         addNewStudent(values).then(()=> {
             console.log("student added")
+            onCLose()
+            fetchStudents()
         }).catch(err => {
             console.log(err)
+        }).finally(() => {
+            setSubmitting(false)
         })
     };
 
@@ -86,6 +94,9 @@ function StudentDrawerForm({showDrawer, setShowDrawer}) {
                         </Button>
                     </Form.Item>
                 </Col>
+            </Row>
+            <Row>
+                {submitting && <Spin indicator={antIcon} />}
             </Row>
         </Form>
     </Drawer>
