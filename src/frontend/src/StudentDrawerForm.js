@@ -1,6 +1,7 @@
 // StudentDrawerForm.js
 
 import {Drawer, Input, Col, Select, Form, Row, Button} from 'antd';
+import {addNewStudent} from "./client";
 
 const {Option} = Select;
 
@@ -8,7 +9,12 @@ function StudentDrawerForm({showDrawer, setShowDrawer}) {
     const onCLose = () => setShowDrawer(false);
 
     const onFinish = values => {
-        alert(JSON.stringify(values, null, 2));
+        console.log(JSON.stringify(values, null, 2))
+        addNewStudent(values).then(()=> {
+            console.log("student added")
+        }).catch(err => {
+            console.log(err)
+        })
     };
 
     const onFinishFailed = errorInfo => {
