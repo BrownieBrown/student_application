@@ -14,14 +14,6 @@ class StudentController(val studentService: StudentService) {
 
     @GetMapping
     fun getAllStudents(): List<Student> {
-
-        return listOf(
-            Student(
-                1L, "Marco", "marco.braun2013@icloud.com", Gender.MALE
-            ),
-            Student(
-                2L, "Julia", "julia.thum@gmail.com", Gender.FEMALE
-            )
-        )
+        return studentService.getAllStudents()
     }
 }
