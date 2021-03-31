@@ -19,4 +19,9 @@ class StudentController(val studentService: StudentService) {
     fun addStudent(@RequestBody student: Student) {
         studentService.addStudent(student)
     }
+
+    @DeleteMapping
+    fun deleteStudent(@RequestBody student: Student) {
+        studentService.deleteStudent(student)
+    }
 }
