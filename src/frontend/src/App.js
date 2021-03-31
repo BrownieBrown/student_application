@@ -1,6 +1,6 @@
-import { getAllStudents } from './client'
+import {deleteStudent, getAllStudents} from './client'
 import { useState, useEffect } from 'react'
-import {Layout, Menu, Breadcrumb, Empty, Table, Spin, Button, Badge, Tag, Avatar} from 'antd'
+import {Layout, Menu, Breadcrumb, Empty, Table, Spin, Button, Badge, Tag, Avatar, Popconfirm} from 'antd'
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -12,6 +12,7 @@ import {
 import StudentDrawerForm from "./StudentDrawerForm";
 
 import './App.css'
+import {errorNotification, successNotification} from "./Notification";
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
@@ -30,7 +31,14 @@ const TheAvatar = ({name}) => {
   </Avatar>
 }
 
-const columns = [
+const removeStudent = (studentId, callback) => {
+  deleteStudent(studentId).then(() => {
+    successNotification("Student deleted", `Student ${studentId} successfully deleted`)
+    callback()
+  })
+}
+
+const columns = fetchStudents => [
   {
    title: '',
    dataIndex: 'avatar',
@@ -57,6 +65,22 @@ const columns = [
     dataIndex: 'gender',
     key: 'gender',
   },
+  {
+    title: 'Actions',
+    key: 'actions',
+    render: (text, student) =>
+        <div>
+          <Popconfirm
+              placement='topRight'
+              title={`Are you sure to delete ${student.name}`}
+              onConfirm={() => removeStudent(student.id, fetchStudents)}
+              okText='Yes'
+              cancelText='No'>
+            <Button value="small">Delete</Button>
+          </Popconfirm>
+          <Button value="small">Edit</Button>
+        </div>
+  }
 ]
 
 function App() {
@@ -71,8 +95,13 @@ function App() {
       .then((data) => {
         console.log(data)
         setStudents(data)
-        setIsFetching(false)
+      }).catch(err => {
+          console.log(err.response)
+          err.response.json().then(res => {
+          console.log(res)
+          errorNotification("There was an issue", `${res.message} [statusCode:${res.status}]`)
       })
+    }).finally(() => setIsFetching(false))
   }
   useEffect(() => {
     fetchStudents()
@@ -94,7 +123,7 @@ function App() {
           />
       <Table
         dataSource={students}
-        columns={columns}
+        columns={columns(fetchStudents)}
         bordered
         title={() =>
             <>

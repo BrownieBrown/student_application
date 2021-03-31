@@ -20,8 +20,8 @@ class StudentController(val studentService: StudentService) {
         studentService.addStudent(student)
     }
 
-    @DeleteMapping
-    fun deleteStudent(@RequestBody student: Student) {
-        studentService.deleteStudent(student)
+    @DeleteMapping("{studentId}")
+    fun deleteStudent(@PathVariable ("studentId") studentId: Long) {
+        studentService.deleteStudent(studentId)
     }
 }

@@ -15,7 +15,7 @@ class StudentService(val studentRepository: StudentRepository) {
         studentRepository.save(student)
     }
 
-    fun deleteStudent(student: Student) {
-        studentRepository.delete(student)
+    fun deleteStudent(studentId: Long) {
+        studentRepository.deleteById(studentId)
     }
 }
