@@ -1,13 +1,15 @@
 import { getAllStudents } from './client'
 import { useState, useEffect } from 'react'
-import { Layout, Menu, Breadcrumb, Empty, Table, Spin } from 'antd'
+import {Layout, Menu, Breadcrumb, Empty, Table, Spin, Button} from 'antd'
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
-  UserOutlined,
+  UserOutlined, PlusOutlined,
 } from '@ant-design/icons'
+
+import StudentDrawerForm from "./StudentDrawerForm";
 
 import './App.css'
 
@@ -41,6 +43,7 @@ function App() {
   const [students, setStudents] = useState([])
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isFetching, setIsFetching] = useState(true)
+  const [isShowDrawer, setIsShowDrawer] = useState(false)
 
   const fetchStudents = () => {
     getAllStudents()
@@ -63,17 +66,22 @@ function App() {
       return <Empty />
     }
     return (
+        <>
+          <StudentDrawerForm showDrawer={isShowDrawer} setShowDrawer={setIsShowDrawer}/>
       <Table
         dataSource={students}
         columns={columns}
         bordered
-        title={() => 'Students'}
+        title={() => <Button onClick={()=> setIsShowDrawer(!isShowDrawer)} type="primary" shape="round" icon={<PlusOutlined />} size="small">
+          Add New Student
+        </Button>}
         pagination={{ pageSize: 50 }}
         scroll={{ y: 500 }}
         rowKey={(student) => {
           return student.id
         }}
       />
+      < />
     )
   }
 

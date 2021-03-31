@@ -10,4 +10,8 @@ class StudentService(val studentRepository: StudentRepository) {
     fun getAllStudents(): MutableList<Student> {
         return studentRepository.findAll()
     }
+
+    fun addStudent(student: Student) {
+        studentRepository.save(student)
+    }
 }
