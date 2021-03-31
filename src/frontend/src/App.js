@@ -35,6 +35,12 @@ const removeStudent = (studentId, callback) => {
   deleteStudent(studentId).then(() => {
     successNotification("Student deleted", `Student ${studentId} successfully deleted`)
     callback()
+  }).catch(err => {
+    console.log(err.response)
+    err.response.json().then(res => {
+      console.log(res)
+      errorNotification("There was an issue", `${res.message} [statusCode:${res.status}]`, "bottomLeft")
+    })
   })
 }
 
@@ -99,7 +105,7 @@ function App() {
           console.log(err.response)
           err.response.json().then(res => {
           console.log(res)
-          errorNotification("There was an issue", `${res.message} [statusCode:${res.status}]`)
+          errorNotification("There was an issue", `${res.message} [statusCode:${res.status}]`, "bottomLeft")
       })
     }).finally(() => setIsFetching(false))
   }
