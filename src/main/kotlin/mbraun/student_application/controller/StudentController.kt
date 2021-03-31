@@ -1,14 +1,16 @@
 package mbraun.student_application.controller
 
+import lombok.AllArgsConstructor
 import mbraun.student_application.model.Gender
 import mbraun.student_application.model.Student
+import mbraun.student_application.service.StudentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1/students")
-class StudentController {
+class StudentController(val studentService: StudentService) {
 
     @GetMapping
     fun getAllStudents(): List<Student> {
