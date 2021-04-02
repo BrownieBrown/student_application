@@ -118,7 +118,19 @@ function App() {
       return <Spin />
     }
     if (students.length <= 0) {
-      return <Empty />
+      return <>
+        <Button
+            onClick={() => setIsShowDrawer(!isShowDrawer)}
+            type="primary" shape="round" icon={<PlusOutlined/>} size="small">
+          Add New Student
+        </Button>
+        <StudentDrawerForm
+            showDrawer={isShowDrawer}
+            setShowDrawer={setIsShowDrawer}
+            fetchStudents={fetchStudents}
+        />
+        <Empty/>
+      </>
     }
     return (
         <>

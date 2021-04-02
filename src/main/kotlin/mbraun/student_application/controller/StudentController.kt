@@ -5,6 +5,7 @@ import mbraun.student_application.model.Gender
 import mbraun.student_application.model.Student
 import mbraun.student_application.service.StudentService
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -16,7 +17,7 @@ class StudentController(val studentService: StudentService) {
     }
 
     @PostMapping
-    fun addStudent(@RequestBody student: Student) {
+    fun addStudent(@Valid @RequestBody student: Student) {
         studentService.addStudent(student)
     }
 
