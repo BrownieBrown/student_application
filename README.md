@@ -26,7 +26,7 @@ Full Stack Training Exercise to learn new concepts
 * Server and Client Side Error Handling
 * Packaging applications for deployment using Docker and Jib
 * AWS RDS & Elastic Beanstalk
-* Unit
+* Unit Testing
 
 To-do list:
 * Software Deployment Automation with Github Actions
