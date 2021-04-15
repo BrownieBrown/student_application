@@ -39,4 +39,4 @@ Project is: _in progress_
 On hold while focusing on another passion project to further deepen those concepts.
 
 ## Contact
-Created by [@browniebytes](https://www.todo) - feel free to contact me!
+Created by [@browniebytes](https://www.browniebytes.de) - feel free to contact me!
